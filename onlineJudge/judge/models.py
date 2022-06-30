@@ -8,9 +8,10 @@ class User(models.Model):
 
 class Problem(models.Model):
     problemId=models.IntegerField()
+    problemName=models.CharField(max_length=100)
     problemText = models.TextField()
     difficulty=models.CharField(max_length=15)
-    status=models.CharField(max_length=15)#Solved/Unsolved
+    solveCount=models.IntegerField()
     score=models.FloatField()
 
 
