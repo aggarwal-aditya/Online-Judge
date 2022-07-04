@@ -1,7 +1,8 @@
 @import url(http://fonts.googleapis.com/css?family=Sniglet|Raleway:900);
 
 
-/* General CSS for Home Page */
+
+
 
 
 body {
@@ -271,6 +272,7 @@ textarea {
     overflow: auto;
 }
 
+
 input[type="submit"] {
     background-color: #F90;
     color: white;
@@ -297,6 +299,7 @@ label {
     padding-left: 20px;
 }
 
+/* -------------------------------------------------------------------------------------- */
 /* CSS For Displaying Questions Page */
 a:link {
     color: blue;

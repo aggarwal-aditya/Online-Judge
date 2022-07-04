@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
 # Create your views here.
 from django.http import HttpResponse
@@ -25,8 +25,9 @@ def detail(request, problemId):
 
 
 def submit(request, problemId):
-    
-    return render(request, 'judge/submissions.html')
+    f=request.FILES['solution']
+    with open
+    return redirect('/judge/submissions')
 
 
 def submission(request):

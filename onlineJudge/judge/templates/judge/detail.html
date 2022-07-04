@@ -7,6 +7,10 @@
     <title>
         Problemset
     </title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'judge/css/styles.css' %}">
 </head>
 
@@ -25,14 +29,16 @@
         </div>
     </header>
     <br>
+
     <h1 align="center">{{problem.problemName}}</h1>
     <p>{{problem.problemText}}</p>
     <br>
     <form enctype="multipart/form-data" action="{% url 'submit' problem.id %}" method="POST">
         {% csrf_token %}
-        <div align="center">
-            File: <input type="FILE" name="file" />
-            <input type="submit" name="Upload" value="Upload" />
+        <div align="center"><br>
+            <input type="FILE" name="file" id="solution" style="width:70%" />
+            <br>
+            <button type="submit" class="btn btn-outline-info btn-lg" style="height: 50px; width: 70% ">Submit</button>
         </div>
     </form>
 </body>
