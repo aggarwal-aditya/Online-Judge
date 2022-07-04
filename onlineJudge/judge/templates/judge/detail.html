@@ -36,7 +36,7 @@
     <form enctype="multipart/form-data" action="{% url 'submit' problem.id %}" method="POST">
         {% csrf_token %}
         <div align="center"><br>
-            <input type="FILE" name="file" id="solution" style="width:70%" />
+            <input type="FILE" name="solution" id="solution" style="width:70%" />
             <br>
             <button type="submit" class="btn btn-outline-info btn-lg" style="height: 50px; width: 70% ">Submit</button>
         </div>

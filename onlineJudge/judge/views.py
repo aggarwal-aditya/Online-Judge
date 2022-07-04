@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 # Create your views here.
 from django.http import HttpResponse
+import os
 
 # from onlineJudge import judge
 
@@ -25,8 +26,21 @@ def detail(request, problemId):
 
 
 def submit(request, problemId):
-    f=request.FILES['solution']
-    with open
+    f = request.FILES['solution'].read()
+    sol_file = open("solutions/code.cpp", "wb")
+    sol_file.write(f)
+    sol_file.close()
+    inp_file = open("solutions/input.txt", "wb")
+    problem = get_object_or_404(Problem, pk=problemId)
+    f = problem.expectedInput
+    inp_file.write(f)
+    inp_file.close()
+    os.system('g++ solutions/code.cpp')
+
+    if os.path.exists("a.out"):
+        os.remove("a.out")
+    if os.path.exists("a.exe"):
+        os.remove("a.exe")
     return redirect('/judge/submissions')
 
 
