@@ -1,7 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Sniglet|Raleway:900);
 
 
-
+/* General CSS for Home Page */
 
 
 body {
@@ -41,7 +41,7 @@ input::placeholder {
 
 
 
-
+/* Some CSS I done know */
 
 
 
@@ -297,74 +297,25 @@ label {
     padding-left: 20px;
 }
 
-.formgroup,
-.formgroup-active,
-.formgroup-error {
-    background-repeat: no-repeat;
-    background-position: right bottom;
-    background-size: 10.5%;
-    transition: background-image 0.7s;
-    -webkit-transition: background-image 0.7s;
-    -moz-transition: background-image 0.7s;
-    -o-transition: background-image 0.7s;
-    width: 566px;
-    padding-top: 2px;
+/* CSS For Displaying Questions Page */
+a:link {
+    color: blue;
+    font-family: Courier;
+    font-weight: bold;
+    text-decoration: none;
 }
 
-.formgroup {
-    background-image: url('http://www.geertjanhendriks.nl/codepen/form/pixel.gif');
+/* visited link */
+a:visited {
+    color: black;
 }
 
-.formgroup-active {
-    background-image: url('http://www.geertjanhendriks.nl/codepen/form/octo.png');
+/* mouse over link */
+a:hover {
+    color: hotpink;
 }
 
-.formgroup-error {
-    background-image: url('http://www.geertjanhendriks.nl/codepen/form/octo-error.png');
+/* selected link */
+a:active {
     color: red;
-}
-
-/* Animation webkit */
-@-webkit-keyframes myfirst {
-    0% {
-        margin-left: -20px
-    }
-
-    90% {
-        margin-left: 100%;
-    }
-
-    100% {
-        margin-left: 100%;
-    }
-}
-
-/* Animation */
-@keyframes myfirst {
-    0% {
-        margin-left: -20px
-    }
-
-    70% {
-        margin-left: 100%;
-    }
-
-    100% {
-        margin-left: 100%;
-    }
-}
-
-.fish {
-    background-image: url('http://www.geertjanhendriks.nl/codepen/form/fish.png');
-    width: 235px;
-    height: 104px;
-    margin-left: -235px;
-    top: 200px;
-    position: absolute;
-    animation: myfirst 12s;
-    -webkit-animation: myfirst 12s;
-    animation-iteration-count: infinite;
-    -webkit-animation-iteration-count: infinite;
-    animation-timing-function: linear;
-    -webkit-animation-timing-function: linear;
 }
