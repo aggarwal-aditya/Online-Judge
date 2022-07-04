@@ -32,7 +32,9 @@ def submit(request, problemId):
     sol_file = open("solutions/code.cpp", "wb")
     sol_file.write(f)
     sol_file.close()
-    testcase = TestCase.objects.get(pk=problemId)
+    problem=Problem.objects.get(pk=problemId)
+    testcase = TestCase.objects.get (pk=problemId)
+    # print(type(testca))
     f = testcase.expectedInput
     inp_file = open("solutions/input.txt", "w")
     inp_file.write(f)

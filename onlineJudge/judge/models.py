@@ -18,10 +18,10 @@ class Problem(models.Model):
 
 
 class TestCase(models.Model):
-    problems = models.ForeignKey(Problem, on_delete=models.CASCADE)
+    problems = models.ForeignKey(
+        Problem, related_name='testcases', on_delete=models.CASCADE)
     expectedInput = models.TextField()
     expectedOutput = models.TextField()
-
 
 class Submission(models.Model):
     problems = models.ForeignKey(Problem, on_delete=models.CASCADE)
