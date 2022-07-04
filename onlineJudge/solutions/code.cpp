@@ -34,10 +34,9 @@ int neighborY[4] = {1, -1, 0, 0};
 string stepDir = "RLDU";
 signed main()
 {
-#ifndef ONLINE_JUDGE
-  freopen("input.txt", "r", stdin);
-//  freopen("output.txt", "w", stdout);
-#endif
-  ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
 
+  ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+  int a, b; cin >> a >> b;
+  cout << a + b;
+  return 0;
 }
