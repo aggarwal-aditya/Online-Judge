@@ -1,6 +1,7 @@
 import filecmp
 from itertools import tee
 from django.shortcuts import render, get_object_or_404, redirect
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Create your views here.
 from django.http import HttpResponse
@@ -18,8 +19,15 @@ def index(request):
 
 def problem(request):
     latest_question_list = Problem.objects.order_by('difficulty')
-    context = {'latest_question_list': latest_question_list}
-    return render(request, 'judge/problems.html', context)
+    page = request.GET.get('page', 1)
+    paginator = Paginator(latest_question_list, 2)
+    try:
+        latest_question_list = paginator.page(page)
+    except PageNotAnInteger:
+        latest_question_list = paginator.page(1)
+    except EmptyPage:
+        latest_question_list = paginator.page(paginator.num_pages)
+    return render(request, 'judge/problems.html', {'latest_question_list': latest_question_list})
 
 
 def detail(request, problemId):
@@ -51,7 +59,7 @@ def submit(request, problemId):
     else:
         verdict = "Wrong Answer"
     if(not os.path.exists("a.out")):
-        verdict="Compilation Error"
+        verdict = "Compilation Error"
     print(verdict)
     if os.path.exists("a.out"):
         os.remove("a.out")

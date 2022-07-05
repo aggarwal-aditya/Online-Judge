@@ -302,7 +302,7 @@ label {
 /* -------------------------------------------------------------------------------------- */
 /* CSS For Displaying Questions Page */
 a:link {
-    color: blue;
+    color: black;
     font-family: Courier;
     font-weight: bold;
     text-decoration: none;
@@ -315,7 +315,7 @@ a:visited {
 
 /* mouse over link */
 a:hover {
-    color: hotpink;
+    color: cornflowerblue;
 }
 
 /* selected link */

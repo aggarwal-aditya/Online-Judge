@@ -8,7 +8,9 @@
     <meta name="viewport" content="width=device-width,
 					initial-scale=1.0" />
     <title>CodePlaza</title>
-    <link rel="icon" type="image/x-icon" href="/assets/favicon.png">
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.png' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
         integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
@@ -64,27 +66,52 @@
         </tbody>
     </table>
 
-    {% if latest_question_list.has_other_pages %}
-    <ul class="pagination">
-        {% if latest_question_list.has_previous %}
-        <li><a href="?page={{ latest_question_list.previous_page_number }}">&laquo;</a></li>
-        {% else %}
-        <li class="disabled"><span>&laquo;</span></li>
-        {% endif %}
-        {% for i in latest_question_list.paginator.page_range %}
-        {% if users.number == i %}
-        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-        {% else %}
-        <li><a href="?page={{ i }}">{{ i }}</a></li>
-        {% endif %}
-        {% endfor %}
-        {% if latest_question_list.has_next %}
-        <li><a href="?page={{ latest_question_list.next_page_number }}">&raquo;</a></li>
-        {% else %}
-        <li class="disabled"><span>&raquo;</span></li>
-        {% endif %}
-    </ul>
-    {% endif %}
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            {% if latest_question_list.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ latest_question_list.previous_page_number }}">Previous</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="True">Previous</a>
+            </li>
+            {% endif %}
+
+            {% if latest_question_list.number|add:'-4' > 1 %}
+            <li class="page-item"><a class="page-link"
+                    href="?page={{ latest_question_list.number|add:'-5' }}">&hellip;</a></li>
+            {% endif %}
+
+            {% for i in latest_question_list.paginator.page_range %}
+            {% if latest_question_list.number == i %}
+            <li class="page-item active" aria-current="page">
+                <span class="page-link">
+                    {{ i }}
+                    <span class="sr-only">(current)</span>
+                </span>
+            </li>
+            {% elif i > latest_question_list.number|add:'-5' and i < latest_question_list.number|add:'5' %} <li
+                class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+                {% endfor %}
+
+                {% if latest_question_list.paginator.num_pages > latest_question_list.number|add:'4' %}
+                <li class="page-item"><a class="page-link"
+                        href="?page={{ latest_question_list.number|add:'5' }}">&hellip;</a></li>
+                {% endif %}
+
+                {% if latest_question_list.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ latest_question_list.next_page_number }}">Next</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="True">Next</a>
+                </li>
+                {% endif %}
+        </ul>
+    </nav>
 </body>
 
 </html>
