@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'judge/css/styles.css' %}">
 </head>
 
+
 <body>
     <header class="oj-header">
         <div class="oj-header-limiter">
@@ -36,8 +37,13 @@
     <form enctype="multipart/form-data" action="{% url 'submit' problem.id %}" method="POST">
         {% csrf_token %}
         <div align="center"><br>
-            <input type="FILE" name="solution" id="solution" style="width:70%" />
-            <br>
+            <input type="FILE" name="solution" id="solution" style="width:70%" required>
+            <label for="lang">Choose a language:</label>
+            <select name="lang" id="lang">
+                <option value="cpp">C++17</option>
+                <option value="py">Python-3</option>
+            </select>
+            <br><br>
             <button type="submit" class="btn btn-outline-info btn-lg" style="height: 50px; width: 70% ">Submit</button>
         </div>
     </form>

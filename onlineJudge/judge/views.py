@@ -29,12 +29,13 @@ def detail(request, problemId):
 
 def submit(request, problemId):
     f = request.FILES['solution'].read()
-    sol_file = open("solutions/code.cpp", "wb")
+    path = r'solutions/code.'
+    path = path+request.POST["lang"]
+    sol_file = open(path, "wb")
     sol_file.write(f)
     sol_file.close()
-    problem=Problem.objects.get(pk=problemId)
-    testcase = TestCase.objects.get (pk=problemId)
-    # print(type(testca))
+    problem = Problem.objects.get(pk=problemId)
+    testcase = TestCase.objects.get(pk=problemId)
     f = testcase.expectedInput
     inp_file = open("solutions/input.txt", "w")
     inp_file.write(f)
