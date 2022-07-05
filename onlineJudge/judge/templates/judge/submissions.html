@@ -1,0 +1,53 @@
+{% load static %}
+
+<html lang="en" dir="ltr">
+
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,
+					initial-scale=1.0" />
+    <title>CodePlaza</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.png' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'judge/css/styles.css' %}">
+
+</head>
+
+<body>
+    <header class="oj-header">
+        <div class="oj-header-limiter">
+            <h1><a href="{% url 'index' %}">Online<span>Judge</span></a></h1>
+            <nav>
+                <a href="{% url 'index' %}" class="selected">Home</a>
+                <a href="{% url 'problem' %}">Problems</a>
+            </nav>
+            <ul>
+                <li><a href="/login" class="lightbox_trigger">Login</a></li>
+                <li><a href="/register" class="lightbox_trigger">Sign up</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class=" jumbotron centered">
+        <div class="container">
+            <i class="fas fa-code fa-6x"></i>
+            <h1 class="display-3">Code-Plaza</h1>
+            <p class="lead">Code Till You Live</p>
+            <hr>
+            <a class="btn btn-outline-info btn-lg" href="#" role="button">Register</a>
+            <a class="btn btn-outline-info btn-lg" href="#" role="button">Login</a>
+            <br><br>
+            <a class="btn btn-outline-info  btn-lg" href="/judge/problems" role="button">Let Me See Questions First</a>
+            <!-- <br><br> -->
+            <!-- <a class="btn btn-outline-info btn-lg" href="#" role="button">Add New Questions</a> -->
+
+        </div>
+    </div>
+
+</body>
+
+</html>

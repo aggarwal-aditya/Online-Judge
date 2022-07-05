@@ -43,32 +43,34 @@ def submit(request, problemId):
     sol_file.write(f)
     sol_file.close()
     problem = Problem.objects.get(pk=problemId)
-    testcase = TestCase.objects.get(pk=problemId)
-    f = testcase.expectedInput
-    inp_file = open("solutions/input.txt", "w")
-    inp_file.write(f)
-    inp_file.close()
-    f = testcase.expectedOutput
-    out_file = open("solutions/output.txt", "w")
-    out_file.write(f)
-    out_file.close()
-    os.system('g++ solutions/code.cpp')
-    os.system('./a.out < solutions/input.txt >solutions/out.txt')
-    if(filecmp.cmp('solutions/output.txt', 'solutions/out.txt', shallow=False)):
-        verdict = "Accepted"
-    else:
-        verdict = "Wrong Answer"
-    if(not os.path.exists("a.out")):
-        verdict = "Compilation Error"
-    print(verdict)
-    if os.path.exists("a.out"):
-        os.remove("a.out")
-    if os.path.exists("solutions/input.txt"):
-        os.remove("solutions/input.txt")
-    if os.path.exists("solutions/out.txt"):
-        os.remove("solutions/out.txt")
-    if os.path.exists("solutions/output.txt"):
-        os.remove("solutions/output.txt")
+    testcase = TestCase.objects.filter(problem=problem)
+    for test in testcase.iterator():
+        f = test.expectedInput
+        inp_file = open("solutions/input.txt", "w")
+        inp_file.write(f)
+        inp_file.close()
+        f = test.expectedOutput
+        out_file = open("solutions/output.txt", "w")
+        out_file.write(f)
+        out_file.close()
+        os.system('g++ solutions/code.cpp')
+        if(not os.path.exists("a.out")):
+            verdict = "Compilation Error"
+        else:
+            os.system('./a.out < solutions/input.txt >solutions/out.txt')
+            if(filecmp.cmp('solutions/output.txt', 'solutions/out.txt', shallow=False)):
+                verdict = "Accepted"
+            else:
+                verdict = "Wrong Answer"
+        print(verdict)
+        if os.path.exists("a.out"):
+            os.remove("a.out")
+        if os.path.exists("solutions/input.txt"):
+            os.remove("solutions/input.txt")
+        if os.path.exists("solutions/out.txt"):
+            os.remove("solutions/out.txt")
+        if os.path.exists("solutions/output.txt"):
+            os.remove("solutions/output.txt")
     return redirect('/judge/submissions')
 
 

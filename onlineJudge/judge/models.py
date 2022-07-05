@@ -18,12 +18,13 @@ class Problem(models.Model):
 
 
 class TestCase(models.Model):
-    problems = models.ForeignKey(
+    problem = models.ForeignKey(
         Problem, related_name='testcases', on_delete=models.CASCADE)
     expectedInput = models.TextField()
     expectedOutput = models.TextField()
 
+
 class Submission(models.Model):
-    problems = models.ForeignKey(Problem, on_delete=models.CASCADE)
+    problem = models.ForeignKey(Problem, on_delete=models.CASCADE)
     pub_date = models.DateTimeField('date published')
     verdict = models.CharField(max_length=15)
