@@ -62,6 +62,7 @@ def submit(request, problemId):
         if(not os.path.exists("a.out")):
             verdict = "Compilation Error"
             soln.verdict = verdict
+            soln.save()
             return redirect('/judge/submissions')
         else:
             os.system('./a.out < solutions/input.txt >solutions/out.txt')
@@ -70,8 +71,10 @@ def submit(request, problemId):
             else:
                 verdict = "Wrong Answer"
                 soln.verdict = verdict
+                soln.save()
                 return redirect('/judge/submissions')
-        print(verdict)
+        soln.verdict = verdict
+        soln.save()
         if os.path.exists("a.out"):
             os.remove("a.out")
         if os.path.exists("solutions/input.txt"):
