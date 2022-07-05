@@ -1,3 +1,5 @@
+from dataclasses import dataclass
+import datetime
 import filecmp
 from itertools import tee
 from django.shortcuts import render, get_object_or_404, redirect
@@ -10,7 +12,7 @@ import os
 # from onlineJudge import judge
 
 
-from .models import Problem, TestCase
+from .models import Problem, Submission, TestCase
 
 
 def index(request):
@@ -44,6 +46,9 @@ def submit(request, problemId):
     sol_file.close()
     problem = Problem.objects.get(pk=problemId)
     testcase = TestCase.objects.filter(problem=problem)
+    soln = Submission()
+    soln.problem = problem
+    soln.pub_date = datetime.datetime.now()
     for test in testcase.iterator():
         f = test.expectedInput
         inp_file = open("solutions/input.txt", "w")
@@ -56,12 +61,16 @@ def submit(request, problemId):
         os.system('g++ solutions/code.cpp')
         if(not os.path.exists("a.out")):
             verdict = "Compilation Error"
+            soln.verdict = verdict
+            return redirect('/judge/submissions')
         else:
             os.system('./a.out < solutions/input.txt >solutions/out.txt')
             if(filecmp.cmp('solutions/output.txt', 'solutions/out.txt', shallow=False)):
                 verdict = "Accepted"
             else:
                 verdict = "Wrong Answer"
+                soln.verdict = verdict
+                return redirect('/judge/submissions')
         print(verdict)
         if os.path.exists("a.out"):
             os.remove("a.out")

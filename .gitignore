@@ -1,12 +1,13 @@
 # Created by https://www.toptal.com/developers/gitignore/api/django,python
 # Edit at https://www.toptal.com/developers/gitignore?templates=django,python
-
+solutions/
 ### Django ###
 *.log
 *.pot
 *.pyc
 __pycache__/
 local_settings.py
+
 media
 
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
