@@ -74,6 +74,8 @@ def submit(request, problemId):
                 soln.save()
                 return redirect('/judge/submissions')
         soln.verdict = verdict
+        problem.solveCount = problem.solveCount+1
+        problem.save()
         soln.save()
         if os.path.exists("a.out"):
             os.remove("a.out")
