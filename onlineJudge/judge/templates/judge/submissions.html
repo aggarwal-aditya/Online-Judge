@@ -31,20 +31,23 @@
             </ul>
         </div>
     </header>
-
     <div class=" jumbotron centered">
         <div class="container">
-            <i class="fas fa-code fa-6x"></i>
-            <h1 class="display-3">Code-Plaza</h1>
-            <p class="lead">Code Till You Live</p>
-            <hr>
-            <a class="btn btn-outline-info btn-lg" href="#" role="button">Register</a>
-            <a class="btn btn-outline-info btn-lg" href="#" role="button">Login</a>
+            {% if verdict == "Accepted" %}
+            <h1 class="display-3">Accepted</h1>
             <br><br>
-            <a class="btn btn-outline-info  btn-lg" href="/judge/problems" role="button">Let Me See Questions First</a>
-            <!-- <br><br> -->
-            <!-- <a class="btn btn-outline-info btn-lg" href="#" role="button">Add New Questions</a> -->
-
+            <img src="{% static 'assets/accepted.png' %}" alt="Accepted" width="300" height="300">
+            {% endif %}
+            {% if verdict == "Wrong Answer" %}
+            <h1 class="display-3">Wrong Answer</h1>
+            <br><br>
+            <img src="{% static 'assets/wrong_answer.jpg' %}" alt="Wrong Answer" width="300" height="300">
+            {% endif %}
+            {% if verdict == "Compilation Error" %}
+            <h1 class="display-3">Compilation Error</h1>
+            <br><br>
+            <img src="{% static 'assets/compilation_error.jpg' %}" alt="Compilation Error" width="300" height="200">
+            {% endif %}
         </div>
     </div>
 

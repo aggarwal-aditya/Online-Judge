@@ -63,20 +63,25 @@ def submit(request, problemId):
             verdict = "Compilation Error"
             soln.verdict = verdict
             soln.save()
-            return redirect('/judge/submissions')
+            return render(request, 'judge/submissions.html', {'verdict': verdict})
         else:
             os.system('./a.out < solutions/input.txt >solutions/out.txt')
             if(filecmp.cmp('solutions/output.txt', 'solutions/out.txt', shallow=False)):
                 verdict = "Accepted"
             else:
+                if os.path.exists("a.out"):
+                    os.remove("a.out")
+                if os.path.exists("solutions/input.txt"):
+                    os.remove("solutions/input.txt")
+                if os.path.exists("solutions/out.txt"):
+                    os.remove("solutions/out.txt")
+                if os.path.exists("solutions/output.txt"):
+                    os.remove("solutions/output.txt")
                 verdict = "Wrong Answer"
                 soln.verdict = verdict
                 soln.save()
-                return redirect('/judge/submissions')
+                return render(request, 'judge/submissions.html', {'verdict': verdict})
         soln.verdict = verdict
-        problem.solveCount = problem.solveCount+1
-        problem.save()
-        soln.save()
         if os.path.exists("a.out"):
             os.remove("a.out")
         if os.path.exists("solutions/input.txt"):
@@ -85,7 +90,10 @@ def submit(request, problemId):
             os.remove("solutions/out.txt")
         if os.path.exists("solutions/output.txt"):
             os.remove("solutions/output.txt")
-    return redirect('/judge/submissions')
+    problem.solveCount = problem.solveCount+1
+    problem.save()
+    soln.save()
+    return render(request, 'judge/submissions.html', {'verdict': verdict})
 
 
 def submission(request):
