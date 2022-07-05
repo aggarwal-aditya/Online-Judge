@@ -50,11 +50,11 @@ def submit(request, problemId):
         verdict = "Accepted"
     else:
         verdict = "Wrong Answer"
+    if(not os.path.exists("a.out")):
+        verdict="Compilation Error"
     print(verdict)
     if os.path.exists("a.out"):
         os.remove("a.out")
-    if os.path.exists("a.exe"):
-        os.remove("a.exe")
     if os.path.exists("solutions/input.txt"):
         os.remove("solutions/input.txt")
     if os.path.exists("solutions/out.txt"):
