@@ -31,12 +31,8 @@
             </ul>
         </div>
     </header>
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
-            {% endfor %}
-    </ul>
+    {% if error %}
+    {{error}}
     {% endif %}
     <form enctype="application/x-www-form-urlencoded" action="{% url 'register' %}" method="POST">
         {% csrf_token %}
