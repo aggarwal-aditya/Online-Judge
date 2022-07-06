@@ -31,13 +31,13 @@
             </ul>
         </div>
     </header>
-    <form>
-        <h1 class="display-3">Sign-Up</h1>
-        <input placeholder="Enter your email" type="text" />
-        <input placeholder="Password" type="password" />
-        <input placeholder="Re_Enter Password" type="password" />
-        <button>Register with Milkshake</button>
-        <h3>Or</h3>
+    <form enctype="application/x-www-form-urlencoded" action="{% url 'register' %}" method="POST">
+        {% csrf_token %}
+        <h1 class="display-3" style="text-align:center">Sign-Up</h1>
+        <input placeholder="Enter your email" type="email" name="email" id="email" required />
+        <input placeholder="Enter your username" type="text" name="handle" id="handle" required />
+        <input placeholder="Password" type="password" name="psw" id="psw" required />
+        <button>Register with CodePlaza</button>
         <button class="google">Login in with Google</button>
     </form>
 

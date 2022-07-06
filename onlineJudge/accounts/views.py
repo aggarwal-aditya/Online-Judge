@@ -14,3 +14,9 @@ import os
 
 def signup(request):
     return render(request, 'accounts/register.html')
+
+
+def register(request):
+    handle = request.POST['handle']
+    
+    return render(request, 'judge/problems.html')
