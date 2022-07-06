@@ -27,4 +27,4 @@ class TestCase(models.Model):
 class Submission(models.Model):
     problem = models.ForeignKey(Problem, on_delete=models.CASCADE)
     pub_date = models.DateTimeField('date published')
-    verdict = models.CharField(max_length=15)
+    verdict = models.CharField(max_length=50)
