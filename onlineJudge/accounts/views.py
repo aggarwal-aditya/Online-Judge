@@ -3,11 +3,9 @@ import re
 from django.shortcuts import render
 from dataclasses import dataclass
 from django.shortcuts import render, get_object_or_404, redirect
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import HttpResponse
 from django.contrib.auth.models import User
-from django.contrib.auth import login
-import os
+from django.contrib.auth import authenticate, login
 
 
 def signup(request):
@@ -27,4 +25,21 @@ def register(request):
         user = User.objects.create_user(handle, password=psw, email=email)
         user.save()
         login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+    return redirect('/judge')
+
+
+def login_page(request):
+    return render(request, 'accounts/login.html')
+
+
+def signin(request):
+    handle = request.POST['handle']
+    psw = request.POST['psw']
+    user = user = authenticate(request, username=handle, password=psw)
+    if user is not None:
+        login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+    else:
+        context = {
+            'error': 'Invalid username/password'}
+        return render(request, 'accounts/login.html', context)
     return redirect('/judge')
