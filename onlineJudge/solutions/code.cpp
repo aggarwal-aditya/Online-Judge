@@ -25,7 +25,7 @@ typedef long long ll;
 vector<int> adj[200007];
 bool visited[200007];
 bool cmp(int a, int b) {
-    return a < b;
+   return a < b;
 }
 template<typename T, typename T1>T amax(T &a, T1 b) {if (b > a)a = b; return a;}
 template<typename T, typename T1>T amin(T &a, T1 b) {if (b < a)a = b; return a;}
@@ -35,10 +35,11 @@ string stepDir = "RLDU";
 signed main()
 {
 // #ifndef ONLINE_JUDGE
-//  freopen("input.txt", "r", stdin);
+//    freopen("input.txt", "r", stdin);
 // //   freopen("output.txt", "w", stdout);
 // #endif
-    ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
-    int a, b; cin >> a >> b;
-    cout << a + b;
+   ios_base::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr);
+   int n; cin >> n;
+   cout << abs(n);
+
 }

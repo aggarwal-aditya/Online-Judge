@@ -13,11 +13,12 @@
         integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
         integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{% static 'judge/css/styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/styles.css' %}">
 
 </head>
 
 <body>
+    {% block content %}
     <header class="oj-header">
         <div class="oj-header-limiter">
             <h1><a href="{% url 'index' %}">Online<span>Judge</span></a></h1>
@@ -25,32 +26,20 @@
                 <a href="{% url 'index' %}" class="selected">Home</a>
                 <a href="{% url 'problem' %}">Problems</a>
             </nav>
+            {% if user.is_authenticated %}
             <ul>
-                <li><a href="/login" class="lightbox_trigger">Login</a></li>
-                <li><a href="/register" class="lightbox_trigger">Sign up</a></li>
+                <li>
+                    <p>Welcome {{user.get_username}}! </p>
+                </li>
+                <li><a href="/accounts/logout" class="lightbox_trigger">Log Out</a></li>
             </ul>
+            {% else %}
+            <ul>
+                <li><a href="/accounts/login" class="lightbox_trigger">Login</a></li>
+                <li><a href="/accounts/signup" class="lightbox_trigger">Sign up</a></li>
+            </ul>
+            {% endif %}
         </div>
     </header>
-    <div class=" jumbotron centered">
-        <div class="container">
-            {% if verdict == "Accepted" %}
-            <h1 class="display-3">Accepted</h1>
-            <br><br>
-            <img src="{% static 'assets/accepted.png' %}" alt="Accepted" width="300" height="300">
-            {% endif %}
-            {% if verdict == "Wrong Answer" %}
-            <h1 class="display-3">Wrong Answer</h1>
-            <br><br>
-            <img src="{% static 'assets/wrong_answer.jpg' %}" alt="Wrong Answer" width="300" height="300">
-            {% endif %}
-            {% if verdict == "Compilation Error" %}
-            <h1 class="display-3">Compilation Error</h1>
-            <br><br>
-            <img src="{% static 'assets/compilation_error.jpg' %}" alt="Compilation Error" width="300" height="200">
-            {% endif %}
-        </div>
-    </div>
-
+    {% endblock %}
 </body>
-
-</html>

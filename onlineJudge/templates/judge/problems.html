@@ -29,19 +29,7 @@
     {% else %}
     <p>No problems are available.</p>
     {% endif %} -->
-    <header class="oj-header">
-        <div class="oj-header-limiter">
-            <h1><a href="{% url 'index' %}">Online<span>Judge</span></a></h1>
-            <nav>
-                <a href="{% url 'index' %}">Home</a>
-                <a href="{% url 'problem' %}" class="selected">Problems</a>
-            </nav>
-            <ul>
-                <li><a href="/login" class="lightbox_trigger">Login</a></li>
-                <li><a href="/register" class="lightbox_trigger">Sign up</a></li>
-            </ul>
-        </div>
-    </header>
+    {% include "judge/base.html" %}
     <div class=" jumbotron centered">
         <h1 class="display-3">Problem Set</h1>
     </div>

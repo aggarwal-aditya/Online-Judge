@@ -63,7 +63,7 @@ ROOT_URLCONF = 'onlineJudge.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'accounts', 'templates', 'accounts')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -140,7 +140,8 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend'
 ]
 SITE_ID = 2
-LOGIN_REDIRECT_URL = '/judge'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = "/"
 
 # Additional configuration settings
 SOCIALACCOUNT_QUERY_EMAIL = True
