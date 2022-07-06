@@ -1,14 +1,11 @@
+import email
 import re
 from django.shortcuts import render
 from dataclasses import dataclass
-import datetime
-import filecmp
-from itertools import tee
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
-# Create your views here.
 from django.http import HttpResponse
+from django.contrib.auth.models import User
 import os
 
 
@@ -18,5 +15,11 @@ def signup(request):
 
 def register(request):
     handle = request.POST['handle']
-    
+    email = request.POST['email']
+    psw = request.POST['psw']
+    try:
+        user = User.objects.get(username=handle)
+    except User.DoesNotExist:
+        user = User.objects.create_user(handle, password=psw, email=email)
+        user.save()
     return render(request, 'judge/problems.html')
