@@ -1,0 +1,46 @@
+{% load static %}
+
+<html lang="en" dir="ltr">
+
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,
+					initial-scale=1.0" />
+    <title>CodePlaza</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.png' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'accounts/css/styles.css' %}">
+
+</head>
+
+<body>
+    <header class="oj-header">
+        <div class="oj-header-limiter">
+            <h1><a href="{% url 'index' %}">Online<span>Judge</span></a></h1>
+            <nav>
+                <a href="{% url 'index' %}" class="selected">Home</a>
+                <a href="{% url 'problem' %}">Problems</a>
+            </nav>
+            <ul>
+                <li><a href="/login" class="lightbox_trigger">Login</a></li>
+                <li><a href="/register" class="lightbox_trigger">Sign up</a></li>
+            </ul>
+        </div>
+    </header>
+    <form>
+        <h1 class="display-3">Sign-Up</h1>
+        <input placeholder="Enter your email" type="text" />
+        <input placeholder="Password" type="password" />
+        <input placeholder="Re_Enter Password" type="password" />
+        <button>Register with Milkshake</button>
+        <h3>Or</h3>
+        <button class="google">Login in with Google</button>
+    </form>
+
+</body>
+
+</html>
