@@ -33,7 +33,12 @@
                 <option value="py">Python-3</option>
             </select>
             <br><br>
+            {% if user.is_authenticated %}
             <button type="submit" class="btn btn-outline-info btn-lg" style="height: 50px; width: 70% ">Submit</button>
+            {% else %}
+            <button type="submit" class="btn btn-info btn-lg" disabled style="height: 50px; width: 70% ">Submit
+                (You must be logged in for this action)</button>
+            {% endif %}
         </div>
     </form>
 </body>

@@ -98,3 +98,7 @@ def submit(request, problemId):
 
 def submission(request):
     return render(request, 'judge/submissions.html')
+
+
+def customtest(request):
+    return render(request, 'judge/customtest.html')
