@@ -17,6 +17,7 @@ class Problem(models.Model):
     difficulty = models.CharField(max_length=15)
     solveCount = models.IntegerField()
     score = models.FloatField()
+    editorial = models.URLField(blank=True, null=True)
 
 
 class TestCase(models.Model):
@@ -28,6 +29,7 @@ class TestCase(models.Model):
 
 class Submission(models.Model):
     problem = models.ForeignKey(Problem, on_delete=models.CASCADE)
+    id = models.AutoField(unique=True, primary_key=True, null=False)
     pub_date = models.DateTimeField('date published')
     userCode = models.TextField()
     verdict = models.CharField(max_length=50)

@@ -8,3 +8,4 @@ from .models import *
 admin.site.register(Problem)
 admin.site.register(TestCase)
 admin.site.register(ProgrammingLanguage)
+admin.site.register(Submission)
