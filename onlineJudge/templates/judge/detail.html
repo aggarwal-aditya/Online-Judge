@@ -23,14 +23,15 @@
     <h1 align="center">{{problem.problemName}}</h1>
     <p>{{problem.problemText}}</p>
     <br>
-    <form enctype="multipart/form-data" action="{% url 'submit' problem.id %}" method="POST">
+    <form enctype="multipart/form-data" action="{% url 'submit' problem.problemId %}" method="POST">
         {% csrf_token %}
         <div align="center"><br>
             <input type="FILE" name="solution" id="solution" style="width:70%" required>
             <label for="lang">Choose a language:</label>
             <select name="lang" id="lang">
-                <option value="cpp">C++17</option>
-                <option value="py">Python-3</option>
+                {% for language in ProgrammingLanguages %}
+                <option value="{{language.id}}">{{language.name}}</option>
+                {% endfor %}
             </select>
             <br><br>
             {% if user.is_authenticated %}

@@ -1,18 +1,11 @@
-from dataclasses import dataclass
 import datetime
 import filecmp
-from itertools import tee
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
-# Create your views here.
+from django.utils import timezone
 from django.http import HttpResponse
 import os
-
-# from onlineJudge import judge
-
-
-from .models import Problem, Submission, TestCase
+from .models import *
 
 
 def index(request):
@@ -33,8 +26,9 @@ def problem(request):
 
 
 def detail(request, problemId):
+    languages = ProgrammingLanguage.objects.all()
     problem = get_object_or_404(Problem, pk=problemId)
-    return render(request, 'judge/detail.html', {'problem': problem})
+    return render(request, 'judge/detail.html', {'problem': problem, 'ProgrammingLanguages': languages})
 
 
 def submit(request, problemId):
@@ -94,6 +88,16 @@ def submit(request, problemId):
     problem.save()
     soln.save()
     return render(request, 'judge/submissions.html', {'verdict': verdict})
+
+# def submit(request, problemId):
+#     newCodeRunner = CodeRunner()
+#     newCodeRunner.userCode = request.FILES['solution'].read()
+#     problem = Problem.objects.get(pk=problemId)
+#     newCodeRunner.testCase = TestCase.objects.filter(problem=problem)
+#     newCodeRunner.status = "In Queue"
+#     newCodeRunner.pub_date = datetime.datetime.now()
+#     newCodeRunner.userLanguage = int(request.POST['lang'])
+#     newCodeRunner.save()
 
 
 def submission(request):
