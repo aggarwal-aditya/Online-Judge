@@ -48,9 +48,9 @@ class ProgrammingLanguage(models.Model):
 
 
 class CodeRunner(models.Model):
+    problem = models.ForeignKey(Problem, on_delete=models.CASCADE)
     status = models.CharField(max_length=100)
     userCode = models.TextField()
     userLanguage = models.IntegerField()
-    testCase = models.ForeignKey(TestCase, on_delete=models.CASCADE)
     queueNo = models.AutoField(primary_key=True)
     pub_date = models.DateTimeField('date published')

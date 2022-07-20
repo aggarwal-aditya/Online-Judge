@@ -6,6 +6,7 @@ from django.utils import timezone
 from django.http import HttpResponse
 import os
 from .models import *
+from judge.execute import evaluate
 from judge.execute import *
 
 
@@ -91,8 +92,18 @@ def detail(request, problemId):
 #     return render(request, 'judge/submissions.html', {'verdict': verdict})
 
 
-    
-
+def submit(request, problemId):
+    newCodeRunner = CodeRunner()
+    problem = Problem.objects.get(pk=problemId)
+    newCodeRunner.problem = problem
+    newCodeRunner.status = "In Queue"
+    newCodeRunner.userCode = request.FILES['solution'].read()
+    newCodeRunner.userCode = newCodeRunner.userCode.decode('utf-8')
+    newCodeRunner.userLanguage = int(request.POST["lang"])
+    newCodeRunner.pub_date = datetime.datetime.now()
+    newCodeRunner.save()
+    return evaluate(request, newCodeRunner.queueNo)
+    # return render(request, 'judge/customtest.html')
 
 
 def submission(request):
