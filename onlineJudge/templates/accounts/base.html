@@ -25,6 +25,7 @@
             <nav>
                 <a href="{% url 'index' %}" class="selected">Home</a>
                 <a href="{% url 'problem' %}">Problems</a>
+                <a href="{% url 'recent' %}">Recent Submissions</a>
             </nav>
             {% if user.is_authenticated %}
             <ul>

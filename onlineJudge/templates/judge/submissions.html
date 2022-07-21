@@ -36,6 +36,22 @@
             <br><br>
             <img src="{% static 'assets/compilation_error.jpg' %}" alt="Compilation Error" width="300" height="200">
             {% endif %}
+            {% if verdict == "TIME LIMIT EXCEEDED" %}
+            <h1 class="display-3">Time Limit Exceeded</h1>
+            <br><br>
+            <img src="{% static 'assets/tle.jpg' %}" alt="Time Limit Exceeded" width="300" height="200">
+            {% endif %}
+            {% if verdict == "RUNTIME ERROR" %}
+            <h1 class="display-3">Runtime Error</h1>
+            <br><br>
+            <img src="{% static 'assets/run_mle.jpg' %}" alt="Runtime Error" width="300" height="200">
+            {% endif %}
+            {% if verdict == "Memory Limit Exceeded" %}
+            <h1 class="display-3">Memory Limit Exceeded</h1>
+            <br><br>
+            <img src="{% static 'assets/run_mle.jpg' %}" alt="Mempry Limit Exceeded" width="300" height="200">
+            {% endif %}
+
         </div>
     </div>
 

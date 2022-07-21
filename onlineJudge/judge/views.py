@@ -106,10 +106,17 @@ def submit(request, problemId):
     return evaluate(request, newCodeRunner.queueNo)
 
 
-# async def submit(request, problemId):
-#     loop = asyncio.get_event_loop()
-#     loop.create_task(submit_async(request, problemId))
-#     return HttpResponse('Hold Tight Evaluating Your Code')
+def recent(request):
+    recentSubmissions = Submission.objects.order_by('-pub_date')
+    page = request.GET.get('page', 1)
+    paginator = Paginator(recentSubmissions, 10)
+    try:
+        recentSubmissions = paginator.page(page)
+    except PageNotAnInteger:
+        recentSubmissions = paginator.page(1)
+    except EmptyPage:
+        recentSubmissions = paginator.page(paginator.num_pages)
+    return render(request, 'judge/recents.html', {'recentSubmissions': recentSubmissions})
 
 
 def submission(request):

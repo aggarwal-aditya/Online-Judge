@@ -15,7 +15,7 @@ LIMITS = {'cputime': 2, 'memory': 256}
 EXECUTED = 0
 TIME_LIMIT_EXCEEDED = 1
 RUNTIME_ERROR = 2
-COMPILATION_FAILED = 3
+COMPILATION_ERROR = 3
 MEMORY_LIMIT_EXCEEDED = 4
 
 PROFILES = []
@@ -46,7 +46,7 @@ def evaluate(request, queueid):
                             "Error: Compilation exceeded time limit or memory limit")
                     else:
                         outputFile.write(result['stderr'].decode('utf-8'))
-                    return COMPILATION_FAILED, result['duration']
+                    return COMPILATION_ERROR, result['duration']
                 toExecute = "./a.out"
                 result = epicbox.run(
                     language.name, toExecute, files=files, limits=LIMITS, stdin=inputFile.read(), workdir=work_dir)
@@ -122,8 +122,8 @@ def evaluate(request, queueid):
                     newCodeRunner.status = 'COMPLETED'
                     newCodeRunner.save()
                     return render(request, 'judge/submissions.html', {'verdict': submission.verdict})
-                elif exitCode == COMPILATION_FAILED:
-                    submission.verdict = 'COMPILATION FAILED'
+                elif exitCode == COMPILATION_ERROR:
+                    submission.verdict = 'Compilation Error'
                     submission.save()
                     newCodeRunner.status = 'COMPLETED'
                     newCodeRunner.save()

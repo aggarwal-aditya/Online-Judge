@@ -1,0 +1,108 @@
+{% load static %}
+
+<html lang="en" dir="ltr">
+
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,
+					initial-scale=1.0" />
+    <title>CodePlaza</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.png' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'judge/css/styles.css' %}">
+
+</head>
+
+<body>
+    <!-- {% if recentSubmissions %}
+    <ul>
+        {% for question in recentSubmissions %}
+        <li><a href="/judge/problems/{{ question.problemId }}/">{{ question.problemName }}</a></li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No problems are available.</p>
+    {% endif %} -->
+    {% include "judge/base.html" %}
+    <div class=" jumbotron centered">
+        <h1 class="display-3">Recent Submissions</h1>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Problem</th>
+                <th>Verdict</th>
+                <!-- <th></th> -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for submission in recentSubmissions %}
+            <tr>
+                <td>
+                    {{ submission.user }}
+                </td>
+                <td>
+                    <a href="/judge/problems/{{ submission.problem.problemId }}/">{{submission.problem.problemName}}</a>
+                </td>
+                <td>{{submission.verdict}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            {% if recentSubmissions.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ recentSubmissions.previous_page_number }}">Previous</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1" aria-disabled="True">Previous</a>
+            </li>
+            {% endif %}
+
+            {% if recentSubmissions.number|add:'-4' > 1 %}
+            <li class="page-item"><a class="page-link" href="?page={{ recentSubmissions.number|add:'-5' }}">&hellip;</a>
+            </li>
+            {% endif %}
+
+            {% for i in recentSubmissions.paginator.page_range %}
+            {% if recentSubmissions.number == i %}
+            <li class="page-item active" aria-current="page">
+                <span class="page-link">
+                    {{ i }}
+                    <span class="sr-only">(current)</span>
+                </span>
+            </li>
+            {% elif i > recentSubmissions.number|add:'-5' and i < recentSubmissions.number|add:'5' %} <li
+                class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+                {% endfor %}
+
+                {% if recentSubmissions.paginator.num_pages > recentSubmissions.number|add:'4' %}
+                <li class="page-item"><a class="page-link"
+                        href="?page={{ recentSubmissions.number|add:'5' }}">&hellip;</a></li>
+                {% endif %}
+
+                {% if recentSubmissions.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ recentSubmissions.next_page_number }}">Next</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" href="#" tabindex="-1" aria-disabled="True">Next</a>
+                </li>
+                {% endif %}
+        </ul>
+    </nav>
+</body>
+
+</html>
