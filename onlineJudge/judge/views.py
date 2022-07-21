@@ -1,5 +1,6 @@
 import datetime
-import filecmp
+import asyncio
+import httpx
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.utils import timezone
@@ -103,7 +104,12 @@ def submit(request, problemId):
     newCodeRunner.pub_date = datetime.datetime.now()
     newCodeRunner.save()
     return evaluate(request, newCodeRunner.queueNo)
-    # return render(request, 'judge/customtest.html')
+
+
+# async def submit(request, problemId):
+#     loop = asyncio.get_event_loop()
+#     loop.create_task(submit_async(request, problemId))
+#     return HttpResponse('Hold Tight Evaluating Your Code')
 
 
 def submission(request):

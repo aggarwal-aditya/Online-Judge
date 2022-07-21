@@ -145,6 +145,7 @@ def evaluate(request, queueid):
                     return render(request, 'judge/submissions.html', {'verdict': submission.verdict})
         submission.save()
         newCodeRunner.status = 'COMPLETED'
+        newCodeRunner.save()
         problem.solveCount += 1
         problem.save()
         return render(request, 'judge/submissions.html', {'verdict': submission.verdict})
