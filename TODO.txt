@@ -1,5 +1,0 @@
-Add Profile Section
-Allow To submit only if logged in
-Add Points to each users profile
-Deploy
-Dockerize
